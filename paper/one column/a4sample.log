@@ -1,0 +1,491 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.11.2)  6 NOV 2014 15:04
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**a4sample.tex
+(./a4sample.tex
+LaTeX2e <2014/05/01>
+Babel <3.9k> and hyphenation patterns for 78 languages loaded.
+(./narms.cls
+Document Class: narms 1995/12/18 v1.0 Standard LaTeX document class
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/fleqn.clo
+File: fleqn.clo 1998/08/17 v1.1c Standard LaTeX option (flush left equations)
+\mathindent=\dimen102
+) (./size12.clo
+File: size12.clo 2004/02/16 v1.4f Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen103
+)
+(./subfigure.sty
+Package: subfigure 1995/03/06 v2.0 subfigure package
+
+Package: subfigure 1995/03/06 v2.0
+\c@subfigure=\count87
+\c@lofdepth=\count88
+\c@subtable=\count89
+\c@lotdepth=\count90
+) (./epsfig.sty
+Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/04/25 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/05/08 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count91
+))
+\Gin@req@height=\dimen104
+\Gin@req@width=\dimen105
+)
+\epsfxsize=\dimen106
+\epsfysize=\dimen107
+)
+(./timesmt.sty
+Package: timesmt 1994/04/29 Times + Mathtime math fonts
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/zmtt/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/zmtt/m/n on input line 25.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/zmtt/m/it on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/zmtt/m/it on input line 26.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/zmtt/m/n on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/zmtt/m/n on input line 27.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/mtt/m/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/mtt/m/n on input line 28.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/b/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  OT1/zmtt/m/n --> OT1/ptm/m/n on input line 33.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/zmtt/m/n --> OT1/cmr/bx/n on input line 37.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/zmtt/m/it --> OML/cmm/b/it on input line 38.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/zmtt/m/n --> OMS/cmsy/b/n on input line 39.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/mtt/m/n --> OMX/mtt/m/n on input line 40.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/m/n on input line 41.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/b/n on input line 42.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
+(Font)                  OT1/zmtt/m/n --> OT1/ptm/b/n on input line 43.
+) (./chicaco.sty
+Using Chicago Manual of Style bibliography: 31 August 1992
+\bibhang=\skip43
+\bibindent=\dimen108
+) (./a4sample.aux
+
+LaTeX Warning: Label `keurough' multiply defined.
+
+
+LaTeX Warning: Label `keurough' multiply defined.
+
+
+LaTeX Warning: Label `keurough' multiply defined.
+
+
+LaTeX Warning: Label `keurough' multiply defined.
+
+
+LaTeX Warning: Label `keurough' multiply defined.
+
+
+LaTeX Warning: Label `keurough' multiply defined.
+
+
+LaTeX Warning: Label `keurough' multiply defined.
+
+
+LaTeX Warning: Label `keurough' multiply defined.
+
+
+LaTeX Warning: Label `keurough' multiply defined.
+
+)
+\openout1 = `a4sample.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 88.
+LaTeX Font Info:    ... okay on input line 88.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 88.
+LaTeX Font Info:    ... okay on input line 88.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 88.
+LaTeX Font Info:    ... okay on input line 88.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 88.
+LaTeX Font Info:    ... okay on input line 88.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 88.
+LaTeX Font Info:    ... okay on input line 88.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 88.
+LaTeX Font Info:    ... okay on input line 88.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 88.
+ (/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count92
+\scratchdimen=\dimen109
+\scratchbox=\box26
+\nofMPsegments=\count93
+\nofMParguments=\count94
+\everyMPshowfont=\toks15
+\MPscratchCnt=\count95
+\MPscratchDim=\dimen110
+\MPnumerator=\count96
+\makeMPintoPDFobject=\count97
+\everyMPtoPDFconversion=\toks16
+) (/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+
+./a4sample.tex:95: LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.95 \\
+       
+? s
+OK, entering \scrollmode...
+
+./a4sample.tex:96: LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.96 
+     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+LaTeX Font Info:    Try loading font information for OT1+zmtt on input line 101
+.
+LaTeX Font Info:    No file OT1zmtt.fd. on input line 101.
+
+LaTeX Font Warning: Font shape `OT1/zmtt/m/n' undefined
+(Font)              using `OT1/cmr/m/n' instead on input line 101.
+
+LaTeX Font Info:    Try loading font information for OML+zmtt on input line 101
+.
+LaTeX Font Info:    No file OMLzmtt.fd. on input line 101.
+
+LaTeX Font Warning: Font shape `OML/zmtt/m/it' undefined
+(Font)              using `OML/cmm/m/it' instead on input line 101.
+
+LaTeX Font Info:    Try loading font information for OMS+zmtt on input line 101
+.
+LaTeX Font Info:    No file OMSzmtt.fd. on input line 101.
+
+LaTeX Font Warning: Font shape `OMS/zmtt/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead on input line 101.
+
+LaTeX Font Info:    Try loading font information for OMX+mtt on input line 101.
+
+LaTeX Font Info:    No file OMXmtt.fd. on input line 101.
+
+LaTeX Font Warning: Font shape `OMX/mtt/m/n' undefined
+(Font)              using `OMX/cmex/m/n' instead on input line 101.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 101.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 101.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 101.
+
+Underfull \vbox (badness 2735) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]
+<sheet.png, id=8, 382.5492pt x 279.444pt>
+File: sheet.png Graphic file (type png)
+ <use sheet.png>
+Package pdftex.def Info: sheet.png used on input line 123.
+(pdftex.def)             Requested size: 426.79134pt x 311.7727pt.
+
+./a4sample.tex:143: Missing $ inserted.
+<inserted text> 
+                $
+l.143 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./a4sample.tex:143: Missing } inserted.
+<inserted text> 
+                }
+l.143 
+      
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (27.71194pt too wide) detected at line 143
+$ \OT1/cmr/m/n/12 [[]\OML/cmm/m/it/12 ; []$
+ []
+
+./a4sample.tex:144: Extra }, or forgotten $.
+\endequation ...inewidth \hbox {\@eqnnum }\egroup 
+                                                  \endtrivlist 
+l.144 \label{keurough} \end{equation}
+                                     
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+./a4sample.tex:144: LaTeX Error: Command \end{equation} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.144 \label{keurough} \end{equation}
+                                     
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+./a4sample.tex:144: LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.144 \label{keurough} \end{equation}
+                                     
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+./a4sample.tex:144: LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.144 \label{keurough} \end{equation}
+                                     
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+./a4sample.tex:144: Missing $ inserted.
+<inserted text> 
+                $
+l.144 \label{keurough} \end{equation}
+                                     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./a4sample.tex:150: Missing } inserted.
+<inserted text> 
+                }
+l.150 ...ind the value of $E_{inf}$ and ${E_{sup}$
+                                                  , then we can use the form...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (28.93698pt too wide) detected at line 167
+$ \OML/cmm/m/it/12 C \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 ^^@\OT1/cmr/m/n/12 3\OM
+L/cmm/m/it/12 :\OT1/cmr/m/n/12 3[\OML/cmm/m/it/12 lg\OT1/cmr/m/n/12 (\OML/cmm/m
+/it/12 f\OT1/cmr/m/n/12 )][1 \OMS/cmsy/m/n/12 ^^@ \OT1/cmr/m/n/12 0\OML/cmm/m/i
+t/12 :\OT1/cmr/m/n/12 85\OML/cmm/m/it/12 lg\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 d\
+OT1/cmr/m/n/12 )][1 \OMS/cmsy/m/n/12 ^^@ \OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT
+1/cmr/m/n/12 46\OML/cmm/m/it/12 lg\OT1/cmr/m/n/12 (1 + [] \OMS/cmsy/m/n/12 ^^@ 
+\OML/cmm/m/it/12 R\OT1/cmr/m/n/12 )]\OML/cmm/m/it/12 ;[]$ []
+ []
+
+[2]
+./a4sample.tex:197: Missing $ inserted.
+<inserted text> 
+                $
+l.197 ...distance d in units of km. Note $h1$ \leq
+                                                   6.5$d$ + $R$ .
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./a4sample.tex:198: Missing $ inserted.
+<inserted text> 
+                $
+l.198 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (69.18356pt too wide) detected at line 211
+$ []\OML/cmm/m/it/12 ;[]$ []
+ []
+
+<urbancountry.png, id=20, 581.17125pt x 392.96812pt>
+File: urbancountry.png Graphic file (type png)
+ <use urbancountry.png>
+Package pdftex.def Info: urbancountry.png used on input line 214.
+(pdftex.def)             Requested size: 426.79134pt x 288.58524pt.
+
+<differentspace.png, id=21, 624.83438pt x 389.20406pt>
+File: differentspace.png Graphic file (type png)
+
+<use differentspace.png>
+Package pdftex.def Info: differentspace.png used on input line 219.
+(pdftex.def)             Requested size: 426.79134pt x 265.84895pt.
+ [3 <./sheet.png>] [4 <./urbancountry.png> <./differentspace.png>]
+Underfull \hbox (badness 3312) in paragraph at lines 249--250
+[]\OT1/ptm/m/n/12 The sim-u-la-tion graph we can con-clude that,
+ []
+
+./a4sample.tex:268: Misplaced alignment tab character &.
+l.268 ...y assurance system carried out by the R &
+                                                   D system-level evaluation...
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+(./a4sample.bbl [5]) [6
+
+] (./a4sample.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 1732 strings out of 493117
+ 24185 string characters out of 6135433
+ 95837 words of memory out of 5000000
+ 5167 multiletter control sequences out of 15000+600000
+ 17605 words of font info for 38 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 37i,11n,27p,2237b,254s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/te
+xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texl
+ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texliv
+e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/
+2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/201
+4/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2014/t
+exmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2014/texmf-dist/
+fonts/type1/urw/times/utmri8a.pfb>
+Output written on a4sample.pdf (6 pages, 346248 bytes).
+PDF statistics:
+ 67 PDF objects out of 1000 (max. 8388607)
+ 43 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+

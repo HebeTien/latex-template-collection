@@ -1,0 +1,373 @@
+
+%%%%%%%%%%%%%%%%%%%%%%% file typeinst.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is the LaTeX source for the instructions to authors using
+% the LaTeX document class 'llncs.cls' for contributions to
+% the Lecture Notes in Computer Sciences series.
+% http://www.springer.com/lncs       Springer Heidelberg 2006/05/04
+%
+% It may be used as a template for your own input - copy it
+% to a new file with a new name and use it as the basis
+% for your article.
+%
+% NB: the document class 'llncs' has its own and detailed documentation, see
+% ftp://ftp.springer.de/data/pubftp/pub/tex/latex/llncs/latex2e/llncsdoc.pdf
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[runningheads,a4paper]{llncs}
+
+\usepackage{multirow}
+\usepackage{amsfonts}
+\usepackage{array,color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx,floatrow}
+\floatsetup[table]{capposition=top}
+
+\usepackage{url}
+\urldef{\mailsa}\path|{yu-zhao, gaosheng}@bupt.edu.cn|
+\newcommand{\keywords}[1]{\par\addvspace\baselineskip
+\noindent\keywordname\enspace\ignorespaces#1}
+
+\begin{document}
+
+\mainmatter  % start of an individual contribution
+
+% first the title is needed
+\title{Pairwise Interaction Differentiated Embeddings for Knowledge Base Completion}
+
+% a short form should be given in case it is too long for the running head
+\titlerunning{Pairwise Interaction Differentiated Embeddings Model}
+
+% the name(s) of the author(s) follow(s) next
+%
+% NB: Chinese authors should write their first names(s) in front of
+% their surnames. This ensures that the names appear correctly in
+% the running heads and the author index.
+%
+\author{Yu Zhao \and Sheng Gao}
+%
+\authorrunning{Yu Zhao \and Sheng Gao}
+% (feature abused for this document to repeat the title also on left hand pages)
+
+% the affiliations are given next; don't give your e-mail address
+% unless you accept that it will be published
+\institute{Beijing University of Posts and Telecommunications, China\\
+\mailsa\\
+%\url{http://www.springer.com/lncs}
+}
+
+%
+% NB: a more complex sample for affiliations and the mapping to the
+% corresponding authors can be found in the file "llncs.dem"
+% (search for the string "\mainmatter" where a contribution starts).
+% "llncs.dem" accompanies the document class "llncs.cls".
+%
+
+%\toctitle{Lecture Notes in Computer Science}
+%\tocauthor{Authors' Instructions}
+\maketitle
+
+
+\begin{abstract}
+Knowledge bases are an extremely important database for knowledge management, which is very useful for question answering, query expansion and other related tasks. However, it often suffers from incompleteness due to a large volume increasing knowledge in real world and a lack of reasoning capability. In this paper, we propose a Pairwise Interaction Differentiated Embedding (PIDE) model to embed the entity or relationship to a differentiated vector and then predict the possible truth of additional facts. The basic idea is that the confidence of the additional predicted fact is determined by pairwise interactions\footnote{such as \emph{(left-entity, right-entity), (left-entity, relationship), (right-entity, relationship)}, of course, not including \emph{(relationship, relationship')}} of the triplet using the latent representation of each item, which exists functional differences when  interacting with the rest in the triplet. Finally, we assess the model by considering the problem of computing how likely the additional triplet is true for the task of knowledge base completion. Experiment on \emph{Freebase} dataset shows that our model outperforms the state-of-the-art methods.
+\keywords{Knowledge Base, Link Prediction, Differentiated Embedding}
+\end{abstract}
+
+
+\section{Introduction}
+\label{introduction}
+Knowledge Bases(KBs) is a special kind of database for knowledge management, such as \emph{WordNet}\cite{G1995}\footnote{wordnet.princeton.edu}, \emph{Freebase}\cite{KCPTJ2008}\footnote{freebase.com} or \emph{Google Knowledge Graph}\footnote{google.com/insidesearch/features/search/knowledge.html}, consisting of a vast amount of knowledge facts, each of which is formed as a triplet like\emph{(left-entity,relationship,right-entity)}, indicating that there exists a relationship between the two entities. For example, knowledge base may records the facts like \emph{(Franklin D. Roosevelt, was born in, New York State)} and \emph{(New York State, belongs to, United States)}, which provides the means for the computerized collection, organization, and retrieval of knowledge. Accordingly, knowledge bases are extremely useful for human-like reasoning, query expansion\cite{JRG2005}, question answering(Siri, Speaktoit, iris, SimSimi) and many other AI areas. However, they always suffer from incompleteness due to a large volume increasing knowledge in real word and a lack of reasoning capability.\\
+\\
+There is a large amount of work extending knowledge bases using external corpora\cite{RDA2005}\cite{ASO2011}\cite{GC2013}. However, not all common knowledge is expressed in the text explicitly while it is obvious to human being. In contrast, we focus on completing them by predicting the likely truth of additional facts, purely based on the existing facts in knowledge bases. For instance, when we know the existing knowledge \emph{(Franklin D. Roosevelt, was born in, New York State)} and \emph{(New York State, belongs to, United States)} from knowledge base, this would allow us to answer the question how likely the fact \emph{(Franklin D. Roosevelt, nationality, United States)} is true. Many of the most recent approaches have focused on modeling in energy-based frameworks for learning embeddings of entities and relationships in latent spaces\cite{AJRY2011}\cite{AXJY2013}\cite{RDCA2013} and enhancing the expressivity and the universality, while they come at expense of substantial increases in model complexity, resulting in higher computational cost and difficulties for optimization. Bordes et al.\cite{ANAJO2013} proposed a simpler model (TransE), which mapped the entities and relationships into vector representations. Despite its simplicity, TransE model performs better than previous complex model. However, a drawback of TransE model is that it can only model linear interaction of entities and relationships in the triplets.\\
+\\
+In this paper, we introduce a model, called Pairwise Interaction Differentiated Embeddings model (PIDE), to learn latent representations of the entities and relationships in knowledge bases for link prediction\footnote{Note that we called the task of completing the KBs or extending the KBs as link prediction.}. The main motivation behind our model is that the confidence of the fact $(e_1,r,e_2)$ is determined by their pairwise interactions using differentiated embeddings. In deed, our approach learns only one differentiated low-dimensional vector for each entity and relationship, reducing the model complexity, computational cost and also giving consideration to the expressiveness.\\
+\\
+In the reminder of the paper, we discuss some related models in Section $\ref{related-work}$ and describe our model in Section $\ref{piem}$. Then we show experiments on real world Knowledge Base (\emph{Freebase}), and demonstrates that PIDE model can significantly outperform the state-of-the-art methods for link prediction in Section $\ref{experiment}$. We finally conclude by sketching some future work directions in Section $\ref{conclusion}$.
+
+
+\section{Related Work}
+\label{related-work}
+Section $\ref{introduction}$ introduces several related models on embedding knowledge bases. In the following we will described these models in detail. \\
+\\
+$\textbf{Structured\ Embedding(SE)}$ was introduced by Bordes et al.\cite{AJRY2011}. The basic idea is to transform the two entities$(e_1,e_2)$ into a common latent space by the corresponding left and right projection matrices of the relationship $r$ and then measuring the similarity of the triplet by $L_1$-norm distance in the embedding space. The similarity function for a given triplet $(e_1,r,e_2)$ is thus defined as:
+\begin{equation}
+\begin{split}
+ g(e_1 ,r,e_2 ) = ||W_{rA} e_1  - W_{rB} e_2 ||_1  \ ,
+\end{split}
+\end{equation}
+where $W_{rA}, W_{rB} \in \mathbb{R}^{k \times k}$, both of them are latent representation for relationship $r$, $W_r= \left(W_{rA}, W_{rB}\right)$, and entities are embedded into a k-dimensional vector space, $e_1,e_2 \in \mathbb{R}^k$. This similarity-based model scores correct triplet lower than the corrupted one. Since the model maps the two entities into a common embedding space independently, it leads to a problem that the parameters of two entity vectors do not interacted with each other, while our model makes them do it directly. As SE model embedding a relationship with a pair of parameters(square matrices), our model embeds relationship into a differentiated vector instead of two matrices resulting in lower computational and optimization cost. \\
+\\
+$\textbf{Semantic\ Matching\ Energy(SME)}$ (\emph{bilinear form}) was proposed by Bordes et al.\cite{AXJY2013}. The main motivation of the model is that entities and relationships would share the same form of representation. It maps all entities and relationships into a common latent space to delete the semantic difference between them. The relationship should first interacted with the left and right entity separately to extract the relevant components. The scoring function (higher scores for correct triplet) is as follows:
+\begin{equation}
+\begin{split}
+g(e_1 ,r,e_2 ) = (W_1 e_1  \otimes W_{rel,1} e_r  + b_1 )^T (W_2 e_2  \otimes W_{rel,2} e_r  + b_2 ) \ ,
+\end{split}
+\end{equation}
+where $e_1,e_2,e_r \in \mathbb{R}^\kappa$, $\otimes$ is Hadamard products, $W_1,W_{rel,1},W_2,W_{rel,2} \in \mathbb{R}^{\kappa \times \kappa}$ and $b_1,b_2 \in \mathbb{R}^{\kappa \times 1}$ are parameters shared by all relations. The model fixes the issue of weak entity vector interaction through matrix and Hadamard products, however, it still have some common parameters for all triplets which increase the computational cost extremely, while our model do not need.\\
+%$\bf{Neural\quad Tensor\quad Networks(NTN)}$ The model was introduced by Socher et al.\cite{} and tackless the issue of weak entity vector interaction through replaces a standard linear neural network layer with a bilinear tensor layer that directly relates the two entity vectors across multiple dimensions. The main intuition of the model is that each relationship would have different parts of semantic word vector space. Each slice of the tensor is responsible for one type of entity pair or instantiation of a relation. The NTN-based scoring function:\begin{equation}g(e_1 ,r,e_2 ) = u_r ^T f(e_1 ^T W_r ^{[1:\kappa]} e_2  + V_r \left[ {_{e_2 }^{e_1 } } \right] + b_r ) \ ,\end{equation}where $V_r \in \mathbb{R}^{\kappa \times 2d}$ and $u_r \in \mathbb{R}^\kappa, b_r \in \mathbb{R}^\kappa$, $f=tanh$ is a standard nonlinearity applied element-wise, $W_r^{[1:k]} \in \mathbb{R}^{d \times d \times k}$ is a tensor and the bilinear tensor product $e_1^TW_r^{[1:\kappa]}e_2$ results in a vector $h \in \mathbb{R}^\kappa$, where each entity is computed by one slice $i = 1,...\kappa$ of the tensor: $h_i =e_1^TW_r^{[i]}e_2$.%
+\\
+$\textbf{Translating\ Embedding(TransE)}$ Bordes et al.\cite{ANAJO2013} propose a framework which models relationships by interpreting them as translations operating on the low-dimensional embedding of the entities. The scoring function (the lower the better for correct triplet) is as follows:
+\begin{equation}
+\begin{split}
+g(e_1,r_,e_2) = ||e_1+e_r-e_2||_p \ ,
+\end{split}
+\end{equation}
+using \emph{$L_p$}-norm, $e_1,e_2,e_r \in \mathbb{R}^\kappa$. The model only can model linear interaction between entities and relationships, however, our model possesses more powerful expressiveness than TransE while with the same simplicity.
+
+\section{Pairwise Interaction Differentiated Embedding Model}
+\label{piem}
+
+In this section, we introduce a Pairwise Interaction Differentiated Embedding model that predicts
+the probability of relation existence by learning differentiated vector representations for them, and then show the learning algorithm.
+%As shown
+%in Figure ~\ref{pie-fig},we consider the knowledge base is a tensor (3-ways array)
+%consist of $\it{E}$,$\it{R}$ and $\it{E}$.We use CP algorithm to decompose the tensor,
+% but adding some constraints.
+
+%\begin{figure}[h]
+%\begin{center}
+%\framebox[4.0in]{$\;$}
+%\includegraphics[width=0.9\textwidth]{pie_new.eps}
+%\end{center}
+%\caption{Pairwise Interaction Embedding Model.}
+%\label{pie-fig}
+%\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{pide.eps}
+\caption{ Pairwise Interaction Differentiated Embeddings(PIDE) for modeling knowledge bases consists of triplets in the form of (\emph{left-entity $e_1$}, \emph{relationship r}, \emph{right-entity $e_2$}). $[e_{1A}, e_{1B}]$, $[e_{rA}, e_{rB}]$ and $[e_{2A}, e_{2B}]$ are differentiated embeddings of $e_1$, \emph{r} and $e_2$ respectively. Their pairwise interactions are expressed by three dot products: $\textcircled{1}<e_{1A}, e_{2A}>$, \textcircled{2}$<e_{1B}, e_{rA}>$, and $\textcircled{3}<e_{2B}, e_{rB}>$, all of which should contribute to the model scoring function.}
+\label{fig:PIDE}
+\end{figure}
+
+\subsection{PIDE Model}
+
+In terms of the problem definition, we use the notations in this paper: E represents the set of all entities, R the set of all relationships. Given a training set $H$ of triplets $(e_1 ,r,e_2 )$, $e_1$,$e_2 \in E$ and $r \in R$, our goal is to
+predict the possible truth of additional facts based purely on the existing relations in the knowledge base. \\
+\\
+Our model is based on three assumptions as follows: \lbrack Pairwise\rbrack : The model scoring function should consist of three pairs: $(e_1,e_2)$ $(e_1,r)$ and $(e_2,r)$, generated from the triplets $(e_1,r,e_2)$, and all of them should support the confidence; \lbrack Entity Differentiated Embeddings\rbrack : Since entity (e.g. $e_2$) and relationship (e.g. $r$) are different classes of items and thus embedded by different kind of semantic representation, therefor, the latent representation of entity (e.g. $e_1$) should divided into two parts $(e_{1A},e_{1B})$ in order to  provide two kinds of functional interaction (e.g. ($e_1,e_2$), ($e_1,r$)). More specifically, the first part $e_{1A}$ is responsible for the interaction with another entity $e_2$ and the second one $e_{1B}$ is responsible for the relationship $r$; \lbrack Relationship Differentiated Embeddings\rbrack : Relationship $r$ refers to a directed edge in knowledge base graph. We consider there exists syntactic differences when the relationship $r$ interacted backward with the left-entity $e_1$ and forward with the right-entity $e_2$, so the representation of the relationship $r$ should be split into two components $(e_{rA},e_{rB})$, reflecting different directions for interaction, that the first one $e_{rA}$ is responsible for left-entity $e_1$ and the second $e_{rB}$ is responsible for right-entity $e_2$.\\
+\\
+As shown in Fig. $\ref{fig:PIDE}$, our model learns latent vectors to represent the entities and the relationships in a relation triplet, that is $e_1  = [e_{1A} ,e_{1B} ]$, $e_2  = [e_{2A} ,e_{2B} ]$ and $r  = [e_{rA} ,e_{rB} ]$.
+We use the first parts of the two entity vectors in a triplet to fix the issue of their interaction (i.e. $e_{1A}^Te_{2A}$), and use the product (i.e. $e_{1B}^Te_{rA}$) to express the interaction of the left entity and relationship vector, and the right entity and relationship vector interaction is determined by $e_{2B}^Te_{rB}$.
+Finally, the model computes a score to represent how likely two entities are in a certain relationship by the following
+PIDE function:
+\begin{equation}
+\begin{split}
+g(e_1 ,r,e_2 ) = e_{1A} ^T e_{2A}  + e_{1B} ^T e_{rA}  + e_{2B} ^T e_{rB} \ ,
+\end{split}
+\end{equation}
+where $e_{1A}, e_{1B}, e_{2A}  ,e_{2B} , e_{rA}$ and $e_{rB} \in \mathbb{R} ^k$. The model returns a higher score if the triplet is true in knowledge base and a lower one otherwise.\\
+\\
+\hrulefill{\hrule height 0.8pt}
+$\bf{Algorithm\ 1}$ Learning PIDE \\
+\hrulefill{\hrule height 0.5pt}
+$\bf{Input}$ Training Set $H = \left\{ {\left( {e_1 ,r,e_2 } \right)} \right\}$ ,entities sets \textit{E}, relation sets \textit{R}, margin $\gamma$ , embeddings dimension $\kappa$\\
+\hspace*{5.mm}$\bf{Output}$ Entity and Rel.ship differentiated embeddings$[E_A,E_B]$, $[E_{rA},E_{rB}]$
+\hrulefill{\hrule height 0.5pt}
+    \begin{enumerate}
+        \item $\bf{initialize}$ $e_A,e_B \gets Gaussian(0,1)/10$ for each $e \in$ \textit{E}
+        \item $\qquad\quad\quad\ \ e_{rA},e_{rB} \gets Gaussian(0,1)/10$ for each $r \in$ \textit{R}
+        \item $\bf{loop}$
+        \item $\quad H_{batch}\in sample(H,m)$  \//\//sample a minibatch of size m
+        \item $\quad T_{batch}\in \phi$  \//\//initialize the training set as null set
+        \item $\quad \bf{for}$ $\left( {e_1 ,r,e_2 } \right)\in H_{batch}$ $\bf{do}$
+        \item $\quad\quad\ $    $\left( {e_1' ,r ,e_2'} \right) \gets $ $sample H_{(e_{1,r,e_2 } )}'$ \//\// sample a corrupted triplet
+        \item $\quad\quad\ \ T_{batch} \gets T_{batch} \cup {((e_1,r,e_2),(e_1',r,e_2'))}$
+        \item $\quad \bf{end\ for}$
+        \item $\ \ $ Update embeddings w.r.t \\
+          \centerline{$\sum\limits_{((e_1 ,r,e_2 ),(e_1' ,r,e_2' )) \in T_{batch} } {\nabla [\gamma  - g(e_1 ,r,e_2 ) + g(e_1' ,r,e_2' )]}$}
+        \item $\quad e_A \gets e_A/\| e_A\|,\ e_B \gets e_B/\| e_B\|$ for each entity $e_A \in E_A, e_B \in E_B$
+        \item $\quad e_{rA} \gets e_{rA}/\| e_{rA}\|,\ e_{rB} \gets e_{rB}/\| e_{rB}\|$ for each $e_{rA} \in E_{rA}, e_{rB} \in E_{rB}$
+        \item $\bf{end\ loop}$
+    \end{enumerate}
+\hrulefill {\hrule height 0.8pt}
+
+\subsection{Learning Algorithm}
+Our model is trained with contrastive max-margin optimization algorithm. The main idea
+is that each triplet in the $H^{(i)}  = (e_1 ^{(i)} ,r^{(i)} ,e_2 ^{(i)} )$ should
+receive a higher score than a corrupt triplet in which one of the entities is replaced with a
+random entity(but not both at one times). To learn such embeddings, we minimize the margin-based ranking objective function over the training set:
+\begin{equation}
+\begin{split}
+J(\Omega ) = \sum\limits_{(e_1 ,r,e_2 ) \in H} {\sum\limits_{(e_1 ',r,e_2 ') \in H'} {\max \{ 0,\gamma  - g(e_1 ,r,e_2 ) + g(e_1 ',r,e_2 ')} } \} \ ,
+\end{split}
+\end{equation}
+where $\gamma$, a positive real number(e.g.1), is a margin hyperparameter, and
+\begin{equation}
+\begin{split}
+H_{(e_1 ,r,e_2 )} ' = \{ (e_1 ',r,e_2 )|e_1 ' \in E\}  \cup \{ (e_1 ,r,e_2 ')|e_2 ' \in E\} \ .
+\end{split}
+\end{equation}
+For training the parameter $[E_A,E_B]$ and the relationships embeddings $[E_{rA},E_{rB}]$ of
+our model, we use stochastic gradient descent(SGD) algorithm with the additional constraints
+of $L_2$-norm for the embeddings of both the entities and relationships.\\
+\\
+Algorithm 1 shows the detailed learning algorithm. We initialize all the embeddings for entities $[E_A,E_B]$
+and relationships $[E_{rA},E_{rB}]$ with Gaussian distribution, then we iterate the following procedure. First we sample a small set (minibatch) of triplets from the training set, and then for each positive triplet in it, we select a random entity to replace its left or right position, sampling a single corrupted (negative) triplet. The parameter are then updated by taking a gradient step gradually. Finally, both the differentiated embedding vectors of entities and relationships are normalized. The algorithm procedure is iterated for a given number of iterations.
+
+\section{Experiments}
+\label{experiment}
+
+Our proposed PIDE model is evaluated on the data set extracted from $Freebase$\cite{KCPTJ2008} to predict how likely some additional facts are held using existing knowledge in KB. For instance, if a person was born in New York State, then his nationality would be United States. Our model can compute the confidence of such new fact based on the latent representations of  entity and relationship existing in the knowledge base. We first introduce the dataset, several related models mentioned above as baseline, metrics for comparison, and the results of link prediction. Finally, we show some case studies to demonstrate the advantage of our model.
+
+\subsection{Data Set}
+
+$\bf{Freebase}$ is a huge and growing KB of general facts, currently including around 1.2 billion triplets and more than 80 million entities. A small data set has 592,213 triplets with 14,951 entities and 1,345 relationships which were randomly split\cite{ANAJO2013}. This data set is denoted \emph{FB15k} in the rest of this section. Table \ref{data-stcs} gives the statistics of the database.
+\begin{table}[htp]
+\begin{floatrow}
+\ttabbox{\caption{Staticstics of $\emph{FB15k}$ used for the experiment.} }{%
+\label{data-stcs}
+\begin{tabular}[t]{|c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{$\emph{FB15k}$}
+      & Entities & Rel.s & Train & Valid & Test \\
+\cline{2-6}
+      & 14951 & 1345 & 483142 & 50000 & 59071 \\
+\hline	
+\end{tabular}}
+\ttabbox{\caption{The number of parameters of different models; $n_e$ and $n_r$ are the number of entities and relationships; $\kappa$ is the embedding dimension.}}{%
+\label{para-stcs}
+\begin{tabular}[t]{|l|l| }
+\hline
+  Model   &  \#parameters \\
+\hline
+SE & $O(n_e\kappa + 2n_r\kappa^2)$ \\
+SME$(Linear)$ & $O(n_e\kappa + n_r\kappa+4\kappa^2)$ \\
+SME$(Binear)$ & $O(n_e\kappa + n_r\kappa+2\kappa^3)$ \\
+TransE & $O(n_e\kappa + n_r\kappa)$ \\
+\hline
+PIDE & $O(2n_e\kappa + 2n_r\kappa)$ \\
+\hline
+\end{tabular}}
+\end{floatrow}
+\end{table}
+\subsection{Baselines and Configurations}
+We compare with some recent models: SE\cite{AJRY2011}, SME\_\emph{linear}\cite{AXJY2013}, SME\_\emph{bilinear}\cite{AXJY2013} and TransE\cite{ANAJO2013}. Table $\ref{para-stcs}$ shows the number of parameters for these models. From that we can see SME\_\emph{linear}\cite{AXJY2013}, SME\_\emph{bilinear}\cite{AXJY2013}, TransE\cite{ANAJO2013} and our PIDE model almost have the same number of parameters, while SE requires much more parameters due to the square matrices embeddings for relationships. We use the codes provided by the authors to train all baseline methods. For SE, SME(\emph{linear}) and SME(\emph{bilinear}), we choose the learning rate among \{0.001, 0.01\}, $\kappa$ among \{20, 50\} and the margin ¦Ã among \{1,10\}, and then confirm the best model by validation sets(with a total of at most 1,000 epoches over the training data). For TransE, we reduce the total number of epoches to 500, the other training parameters is the same.\\
+\\
+For experiments with PIDE model, we select the learning rate ${\lambda}_e$(of entities embedding) and ${\lambda}_r$(of relationships embeddings) for the stochastic gradient descent among \{0.001,0.01\}, the margin $\gamma$ among \{1,10\} and the embedding dimension $\kappa$ in a range of \{50,100\} on the validation set. Finally, our model configuration on \emph{FB15k} can be set up as \{$\kappa = 50, {\lambda}_e=0.01,{\lambda}_r = 0.001, \gamma=1$\}, and training is limited to at most 500 epoches.
+
+\subsection{Evaluation Metrics}
+For the experiment, we use the ranking criteria\cite{AJRY2011} for evaluation. For each test triplet,
+we remove the left-entity and replace it by each of the entities of the dictionary in turn.
+The function values $g(e_1',r,e_2)$ of the negative triplets are first computed by our model
+and then sorted by descending order, then we can obtain the exact rank of the correct entity.
+We repeat the whole procedure while removing the right-entity instead of the left-entity of the test triplet.
+Finally, we use two evaluation metrics for comparison: the mean of those predicted ranks (Mean\_Rank); the proportion of correct entities ranked in the top 10 (Hits@10(\%)).
+
+\subsection{Experiment Results}
+In the experiments, we consider predicting the left-entity or right-entity of the triplets in the testing data set. Table \ref{e-p-r} shows the results on \emph{FB15k} with other compared models. Note that the Mean\_Rank matric is the lower the better and the Hits@10(\%) is on the contrary. From the results, our proposed PIDE model outperforms all counterparts with both metrics.\\
+\\
+ We discussed in Section $\ref{related-work}$ that SE, SME(\emph{linear}) and SME(\emph{bilinear}) are more complex than our proposal, resulting in higher computational and optimization cost. Actually their complexity make it very difficult to learn and always be subject to more serious underfitting due to lack of enough training data set, which may be the main reason why all of them perform worse. The results of link prediction are SE (Mean\_Rank:271, Hits@10(\%):28.9), SME\_\emph{linear} (Mean\_ Rank:272, Hits@10(\%):30.8), SME\_\emph{bilinear} (Mean\_Rank:282, Hits@10(\%) :31.3). TransE and our PIDE model have same simplicity and perform better than the others mentioned above because of training better and indeed less subject to underfitting. However, TransE possesses lower expressive than PIDE model, performing worse:(Mean\_Rank:226, Hits@10(\%):37.65) and our PIDE model (Mean\_Rank: 211.36, Hits@10 (\%):40.32). So we believe that the good performance of PIED is due to the appropriate design of the model and its relative simplicity.
+
+\begin{table}[t]
+\caption{Link prediction results of \emph{FB15k}. (The lower the better for Mean\_Rank, whereas Hits@10(\%) is on the contrary.)}
+\label{e-p-r}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+ DataSet:\emph{FB15k}   & Metrics & SE & \tabincell{c}{ SME\\ $\left( Linear \right) $}&\tabincell{c}{SME \\ $\left( Binear \right)$}& TransE & PIDE\\
+\hline
+    \multirow{2}{*}{Results}
+    & Mean\_Rank                & 271 & 272  & 282   & 226    & $\bf{211.36}$ \\
+    \cline{2-7}
+    & Hits@10 $\left(\%\right)$ & 28.9  & 30.8 & 31.3  & 37.65   & $\bf{ 40.32}$ \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection{Case study}
+
+Table $\ref{case-study1}$ and Table $\ref{case-study2}$ show the link prediction examples by predicting the \emph{right-entity} and \emph{left-entity} respectively given the rest of the triple on \emph{FB15k} test set using PIDE model, which fully demonstrates the predicting capabilities. Given the input, the predicting results ranked top \emph{n}(e.g. \emph{n=9} here for typeseting conveniently) are listed in order, and the exactly correct answer is marked bold. Observing the results, we can find that even if the true fact is not always at the best front, the predicted results reflect common-sense.\\
+\begin{table}[t]
+\caption{Example prediction on FB15k using PIDE model. $\bf{Bold}$ indicates the true right-entity case.}
+\label{case-study1}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+ Input:left-entity and relationship & Prediction: right-entities \\
+\hline
+\tabincell{c}{ Very Bad Things\\/film/film/directed\_by }&\tabincell{c}{ $\bf{Peter Berg}$,Gus Van Sant,Brian Grazer,\\
+  Brett Ratner,Akiva Goldsman,Chris Weitz, \\Barry Sonnenfeld,Ivan Reitman,Roland Emmerich}\\
+\hline
+\tabincell{c}{Cayuga County\\/location/location/containedby}&\tabincell{c}{ $\bf{New York}$, Connecticut, Pennsylvania,\\ New Jersey, Virginia, Massachusetts,\\ Maryland, New York City, Georgia }\\
+\hline
+\tabincell{c}{Samuel Goldwyn\\/people/person/religion}&\tabincell{c}{$\bf{Judaism}$, Catholicism, Methodism, \\
+Presbyterianism, Baptists, Agnosticism,\\Protestantism, Atheism, Christianity}\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[t]
+\caption{Example prediction on \emph{FB15k} for predicting left-entities. $\bf{Bold}$ indicates the groundtruth and $\it{italics}$ indicates other true left-entities presented in the training set.}
+\label{case-study2}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+ Prediction:left-entity &Input:relationship and right-entity  \\
+\hline
+ \tabincell{c}{ $\bf{British\ people}$, $\textit{White British}$, $\textit{Welsh people}$,\\
+  English people, Scottish people,\\ Croatian American,British Indian,\\ Dutch people,Irish people in Great Britain}&\tabincell{c}{/people/ethnicity/languages\_spoken\\Welsh Language}\\
+\hline
+ \tabincell{c}{$\bf{Television\ producer}$,$\textit{Actor}$,\\Television Director,Screenwriter,\\Voice Actor,Comedian, Film Producer,\\Film director,Presenter}&\tabincell{c}{ /people/profession/people\_\\\_with\_this\_profession\\ Callum Keith Rennie}\\
+\hline
+\tabincell{c}{ Pancreatic cancer, Lung cancer,\\ $\bf{Myocardial infarction}$, Prostate cancer,\\ Pneumonia Alzheimer's disease,Natural causes, \\Stroke, Drug overdose, Cardiovascular disease}&\tabincell{c}{/people/cause\_of\_death/people\\ Dick Clark}\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{Conclusion }
+\label{conclusion}
+We introduced the Pairwise Interaction Differentiated Embedding(PIDE) model for knowledge base completion. Our model learned the latent differentiated representations of the entities and relationships and predicted the possible truth of additional facts based purely on the existing relations in the knowledge base. The experiment on \emph{FB15k} demonstrated that our model worked better than the state-of-the-art models.\\
+\\
+Future work could focus on analyzing this model further by considering additional constraints for the differentiated embeddings to control the degree of their alienation.
+
+\subsubsection*{Acknowledgments.}
+This research was supported by the National Natural Science Foundation of China under grant No. 61300080, No. 61273217, the Fundamental Research Funds for the Central Universities of China under grant No. 2013RC0119, No. 2013PT16, the Chinese 111 program of 'Advanced Intelligence and Network Service' under grant No. B08004. The authors are supported by the Key Laboratory of Advanced Information Science and Network Technology of Beijing under grant No. XDXX1304.
+
+\begin{thebibliography}{4}
+
+\bibitem{G1995} G.A. Miller. WordNet: A Lexical Database for English. Communications of the ACM (1995)
+
+\bibitem{KCPTJ2008} K. Bollacker, C. Evans, P. Paritosh, T. Sturge, and J. Taylor. Freebase: a collaboratively created
+graph database for structuring human knowledge. In Proceedings of the 2008th ACM SIGMOD
+international conference on Management of data (2008)
+
+\bibitem{JRG2005} J. Graupmann, R. Schenkel, and G. Weikum. The SphereSearch engine for unified ranked
+retrieval of heterogeneous XML and web documents. In Proceedings of the 31st international
+conference on Very large data bases, VLDB (2005)
+
+\bibitem{RDA2005} R. Snow, D. Jurafsky, and A. Y. Ng. Learning syntactic patterns for automatic hypernym
+discovery. In NIPS (2005)
+
+\bibitem{ASO2011} A. Fader, S. Soderland, and O. Etzioni. Identifying relations for open information extraction.
+In EMNLP (2011)
+
+\bibitem{GC2013} G. Angeli and C. D. Manning. Philosophers are mortal: Inferring the truth of unseen facts. In
+CoNLL (2013)
+
+\bibitem{AJRY2011} A. Bordes, J. Weston, R. Collobert, and Y. Bengio. Learning structured embeddings of knowledge
+bases. In Proceedings of the 25th Annual Conference on Artificial Intelligence (AAAI) (2011)
+
+\bibitem{AXJY2013} A. Bordes, X. Glorot, J. Weston, and Y. Bengio. A semantic matching energy function for
+learning with multi-relational data. Machine Learning (2013)
+
+\bibitem{RDCA2013} R. Socher, D. Chen, C. D. Manning, and A. Y. Ng. Learning new facts from knowledge bases
+with neural tensor networks and semantic word vectors. In Advances in Neural Information
+Processing Systems (NIPS 26) (2013)
+
+\bibitem{ANAJO2013} Antoine Bordes, Nicolas Usunier, Alberto Garcia-Duran, Jason Weston and Oksana Yakhnenko. Translating
+    Embeddings for Modeling Multi-relational. In Proceedings of Neural Information Processing Systems (NIPS 26), Lake Taho, NV, USA (2013)
+
+\end{thebibliography}
+
+\end{document}
